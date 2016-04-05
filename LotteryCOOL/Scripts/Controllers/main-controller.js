@@ -5,22 +5,34 @@
 
 var model = {
     items: [],
+    links: [{ content: "mySite", url: "http://mySite.com" }],
     url: "http://xskt.com.vn/rss-feed/mien-nam-xsmn.rss"
 };
 
 var lotteryApp = angular.module("lotteryApp", []);
-var mainController = lotteryApp.controller("mainController", function($scope) {
+
+var mainController = lotteryApp.controller("mainController", function ($scope) {
     $scope.model = model;
 
-    $scope.fetchFeed = function() {
-        $.getJSON(Yql.getYqlUrl($scope.model.url), function(data) {
-            
-            //model.items = data.query.results.item;
-
+    $scope.fetchFeed = function () {
+        $.getJSON(Yql.getYqlUrl($scope.model.url, "rss", "json"), function (data) {
             model.items = parseLotteryRss(data);
             $scope.$apply();
         });
     };
+});
+
+lotteryApp.run(function () {
+    var sourceUrl = "http://xskt.com.vn/rss/";
+    $.getJSON(Yql.getYqlUrl(sourceUrl, "html", "xml"), function (data) {
+        var links = $(data.results[0]).find("#ulrss>li>a");
+        links.each(function (index, item) {
+            model.links.push({
+                content: item.textContent,
+                url: item.href
+            });
+        });
+    });
 });
 
 /*$(function() {

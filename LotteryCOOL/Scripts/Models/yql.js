@@ -1,9 +1,9 @@
 ﻿var Yql = {
-    getYqlUrl: function(sourceUrl) {
+    getYqlUrl: function (sourceUrl, dataType, format) {
         return [
             "http://query.yahooapis.com/v1/public/yql",
-            "?q=" + encodeURIComponent("select * from rss where url='" + sourceUrl + "'"),
-            "&format=json&callback=?"
+            "?q=" + encodeURIComponent("select * from " + dataType + " where url='" + sourceUrl + "'"),
+            "&format=" + format + "&callback=?"
         ].join("");
     }
 };

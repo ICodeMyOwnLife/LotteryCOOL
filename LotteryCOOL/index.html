@@ -12,7 +12,7 @@
 
 <body ng-controller="mainController">
     <div class="container-fluid">
-        <form class="form-horizontal">
+        <!--<form class="form-horizontal">
             <div class="form-group row">
                 <label for="txtUrl" class="col-sm-1 control-label">URL:</label>
                 <div class="col-sm-4">
@@ -22,7 +22,11 @@
                     <button id="cmdGetFeed" class="btn btn-primary" ng-click="fetchFeed()">Get Feed</button>
                 </div>
             </div>
-        </form>
+        </form>-->
+
+        <select ng-model="selectedLink" ng-options="link.content for link in model.links">
+            <!--<option ng-options="link.content for link in model.links" ng-repeat="link in model.links" value="{{link.url}}">{{link.content}}</option>-->
+        </select>
 
         <div class="row" ng-repeat="item in model.items">
             <div class="panel panel-success">
