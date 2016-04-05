@@ -33,6 +33,10 @@ lotteryApp.run(function () {
             });
         });
     });
+
+    $http.get(Yql.getYqlUrl(sourceUrl, "html", "xml")).then(function(response) {
+
+    });
 });
 
 /*$(function() {
