@@ -13,30 +13,25 @@ var model = {
 
 var lotteryApp = angular.module("lotteryApp", []);
 
+var selectRssLink = function (url, $http) {
+    $http.jsonp(Yql.getYqlUrl(url, "rss", "json")).then(function (response) {
+        model.items = parseLotteryRss(response.data);
+    });
+};
+
 var mainController = lotteryApp.controller("mainController", function ($scope, $http) {
     $scope.model = model;
 
-    var selectRssLink = function(url) {
-        $http.jsonp(Yql.getYqlUrl(url, "rss", "json")).then(function (response) {
-            model.items = parseLotteryRss(response.data);
-        });
-    };
-
     $scope.fetchFeed = function () {
-        /*$.getJSON(Yql.getYqlUrl($scope.model.url, "rss", "json"), function (data) {
-            model.items = parseLotteryRss(data);
-            $scope.$apply();
-        });*/
-
         $http.jsonp(Yql.getYqlUrl($scope.model.url, "rss", "json")).then(function(response) {
             model.items = parseLotteryRss(response.data);
         });
 
-        selectRssLink($scope.model.url);
+        selectRssLink($scope.model.url, $http);
     };
 
     $scope.selectLink = function() {
-        selectRssLink($scope.model.selectedLink.url);
+        selectRssLink($scope.model.selectedLink.url, $http);
     };
 });
 
@@ -64,22 +59,12 @@ lotteryApp.run(function ($http) {
         return rssLinks;
     }
 
-    /*$.getJSON(Yql.getYqlUrl(sourceUrl, "html", "xml"), function (data) {
-        /*var links = $(data.results[0]).find("#ulrss>li>a");
-        links.each(function (index, item) {
-            model.links.push({
-                content: item.textContent,
-                url: item.href
-            });
-        });#1#
-        model.links = getRssLinks(data);
-    });*/
-
     $http.jsonp(Yql.getYqlUrl(sourceUrl, "html", "xml")).then(function (response) {
         var links = getRssLinks(response.data);
         if (links.length === 0) return;
 
         model.links = links;
         model.selectedLink = links[0];
+        selectRssLink(model.selectedLink.url, $http);
     });
 });
