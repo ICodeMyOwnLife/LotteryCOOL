@@ -15,10 +15,10 @@ var mainController = lotteryApp.controller("mainController", function($scope) {
     $scope.fetchFeed = function() {
         $.getJSON(Yql.getYqlUrl($scope.model.url), function(data) {
             
-            model.items = data.query.results.item;
-            $scope.$apply();
+            //model.items = data.query.results.item;
 
-            var result = parseLotteryRss(data);
+            model.items = parseLotteryRss(data);
+            $scope.$apply();
         });
     };
 });
