@@ -1,9 +1,11 @@
 ﻿/// <reference path="angular.js" />
-/// <reference path="../Models/yql.js" />
 /// <reference path="jquery-2.2.2.js" />
+/// <reference path="../Models/yql.js" />
+/// <reference path="../Models/lottery.js" />
 
 var model = {
-    items: []
+    items: [],
+    url: "http://xskt.com.vn/rss-feed/mien-nam-xsmn.rss"
 };
 
 var lotteryApp = angular.module("lotteryApp", []);
@@ -11,9 +13,12 @@ var mainController = lotteryApp.controller("mainController", function($scope) {
     $scope.model = model;
 
     $scope.fetchFeed = function() {
-        $.getJSON(Yql.getYqlUrl($scope.url), function(data) {
+        $.getJSON(Yql.getYqlUrl($scope.model.url), function(data) {
+            
             model.items = data.query.results.item;
             $scope.$apply();
+
+            var result = parseLotteryRss(data);
         });
     };
 });
