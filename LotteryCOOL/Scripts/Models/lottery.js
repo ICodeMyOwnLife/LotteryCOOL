@@ -7,7 +7,7 @@ function toProperCase(text) {
 
 // title ~ "KẾT QUẢ XỔ SỐ BÌNH DƯƠNG NGÀY 01/04 (Thứ Sáu)
 function getLocation(title) {
-    var regexLocation = /KẾT QUẢ XỔ SỐ (\S+) NGÀY/;
+    var regexLocation = /KẾT QUẢ XỔ SỐ (.+) NGÀY/i;
     var loc = regexLocation.exec(title)[1];
     return toProperCase(loc);
 }

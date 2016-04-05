@@ -24,8 +24,8 @@
             </div>
         </form>-->
 
-        <select ng-model="selectedLink" ng-options="link.content for link in model.links">
-            <!--<option ng-options="link.content for link in model.links" ng-repeat="link in model.links" value="{{link.url}}">{{link.content}}</option>-->
+        <select ng-model="model.selectedLink" ng-options="link.content for link in model.links" ng-change="selectLink()">
+            
         </select>
 
         <div class="row" ng-repeat="item in model.items">
@@ -121,6 +121,7 @@
     </div>
     <script src="Scripts/Libraries/bootstrap.min.js"></script>
     <script src="Scripts/Libraries/moment.min.js"></script>
+    <script src="Scripts/Libraries/uri.js"></script>
     <script src="Scripts/Models/lottery.js"></script>
     <script src="Scripts/Models/yql.js"></script>
     <script src="Scripts/Controllers/main-controller.js"></script>

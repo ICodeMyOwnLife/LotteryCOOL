@@ -94,6 +94,7 @@
     <Content Include="Scripts\Libraries\angular.min.js.map" />
     <Content Include="Scripts\Libraries\errors.json" />
     <Content Include="Scripts\Libraries\jquery-2.2.2.min.map" />
+    <Content Include="Scripts\Libraries\uri.js" />
     <Content Include="Scripts\Libraries\version.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
