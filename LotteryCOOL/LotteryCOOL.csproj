@@ -70,6 +70,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css" />
     <Content Include="index.html" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -81,6 +82,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Scripts\Custom\custom-filters-angular.js" />
     <Content Include="Scripts\Libraries\angular-animate.min.js.map" />
     <Content Include="Scripts\Libraries\angular-aria.min.js.map" />
     <Content Include="Scripts\Libraries\angular-cookies.min.js.map" />
@@ -885,6 +887,8 @@
     <Content Include="Scripts\Libraries\moment.js" />
     <Content Include="Scripts\Libraries\moment.min.js" />
     <Content Include="Scripts\Models\yql.js" />
+    <Content Include="Scripts\test.js" />
+    <Content Include="test.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

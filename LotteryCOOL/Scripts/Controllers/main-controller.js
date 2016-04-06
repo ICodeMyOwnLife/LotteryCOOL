@@ -1,8 +1,11 @@
 ﻿/// <reference path="angular.js" />
 /// <reference path="jquery-2.2.2.js" />
+/// <reference path="../Libraries/moment.js" />
+/// <reference path="../Libraries/moment-with-locales.js" />
 /// <reference path="../Libraries/uri.js" />
 /// <reference path="../Models/yql.js" />
 /// <reference path="../Models/lottery.js" />
+/// <reference path="../Custom/custom-filters-angular.js" />
 
 var model = {
     items: [],
@@ -11,7 +14,7 @@ var model = {
     url: "http://xskt.com.vn/rss-feed/mien-nam-xsmn.rss"
 };
 
-var lotteryApp = angular.module("lotteryApp", []);
+var lotteryApp = angular.module("lotteryApp", ["filtersModule"]);
 
 var selectRssLink = function (url, $http) {
     $http.jsonp(Yql.getYqlUrl(url, "rss", "json")).then(function (response) {
@@ -37,6 +40,7 @@ var mainController = lotteryApp.controller("mainController", function ($scope, $
 
 
 lotteryApp.run(function ($http) {
+    moment.locale("vi-VN");
     var sourceUrl = "http://xskt.com.vn/rss/";
     var parser = document.createElement("a");
     parser.href = sourceUrl;

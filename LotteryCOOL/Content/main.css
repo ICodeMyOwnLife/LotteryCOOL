@@ -1,0 +1,29 @@
+﻿body {
+}
+
+.bordered {
+    border: 1px solid #008b8b;
+}
+
+.loose-row {
+    margin: 4px;
+}
+
+.full-height {
+    height: 100%;
+}
+
+table.tight > tbody {
+    margin: 0;
+    padding: 0;
+}
+
+table.tight > tbody > tr {
+    margin: 0;
+    padding: 0;
+}
+
+table.tight > tbody > tr > td {
+    margin: 0;
+    padding: 0;
+}

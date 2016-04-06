@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html ng-app="testApp">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="Scripts/Libraries/angular.min.js"></script>
+    <script src="Scripts/test.js"></script>
+</head>
+<body ng-controller="testCtrl">
+    <a href="/svn">SVN</a>
+    <a href="/git">GIT</a>
+    <a href="/exe">EXE</a>
+<a href="/cnn">CNN</a>
+<div class="row" ng-repeat="item in items"><h2 class="text-center">{{item}}</h2></div>
+    <script src="Scripts/Libraries/jquery-2.2.2.min.js"></script>
+    <script src="Scripts/Libraries/bootstrap.min.js"></script>
+</body>
+</html>
