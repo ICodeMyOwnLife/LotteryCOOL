@@ -25,9 +25,7 @@
             </div>
         </form>-->
 
-        <select ng-model="model.selectedLink" ng-options="link.content for link in model.links" ng-change="selectLink()">
-            
-        </select>
+        <select ng-model="model.selectedLink" ng-options="link.content for link in model.links" ng-change="selectLink()"></select>
 
         <!--<div ng-repeat="item in model.items">
             <h2 class="text-center danger">{{item.date}}</h2>
@@ -50,6 +48,40 @@
                 </div>
             </div>
         </div>-->
+        <div class="panel" ng-repeat="item in model.items">
+            <div class="panel-heading">
+                <h2 class="text-center">{{item.date.format('dddd DD/MM/YYYY') | uppercase}}</h2>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div ng-repeat="locPrizes in item.locationPrizes">
+                        <h3 class="text-center">{{locPrizes.location | uppercase}}</h3>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" scope="col">Giải</th>
+                                    <th class="text-center" scope="col">Kết quả trúng</th>
+                                    <th class="text-center" scope="col">2 số cuối</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat-start="prizeResults in locPrizes.prizeResults"></tr>
+                                <tr ng-repeat="result in prizeResults.results">
+                                    <td class="text-center vertical-center" rowspan="{{prizeResults.results.length}}" ng-if="$first">{{prizeResults.prize}}</td>
+                                    <td class="text-center">{{result.full}}</td>
+                                    <td class="text-center">{{result.trailing}}</td>
+                                </tr>
+                                <tr ng-repeat-end></tr>
+                                <tr ng-repeat-end></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="panel" ng-repeat="item in model.items">
             <div class="panel-heading">
@@ -57,15 +89,15 @@
             </div>
             <div class="panel-body">
                 <div ng-repeat="locPrizes in item.locationPrizes">
-                    <h3>{{locPrizes.location}}</h3>
+                    <span>{{locPrizes.location}}</span>
                     <div class="row bordered loose-row" ng-repeat="prizeResults in locPrizes.prizeResults">
                         <div class="col-xs-3">
-                            <h4>{{prizeResults.prize}}</h4>
+                            <h4 class="text-center">{{prizeResults.prize}}</h4>
                         </div>
                         <div class="col-xs-9">
                             <div class="row" ng-repeat="result in prizeResults.results">
-                                <div class="col-xs-7">{{result.full}}</div>
-                                <div class="col-xs-5">{{result.trailing}}</div>
+                                <div class="col-xs-7 text-center">{{result.full}}</div>
+                                <div class="col-xs-5 text-center">{{result.trailing}}</div>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,21 @@
 ﻿body {
 }
 
+.vertical-center {
+    vertical-align: middle;
+}
+
+tbody > tr > td.vertical-center {
+    vertical-align: middle;
+}
+
 .bordered {
     border: 1px solid #008b8b;
 }
 
 .loose-row {
-    margin: 4px;
+    margin: 8px;
+    padding: 8px;
 }
 
 .full-height {
