@@ -1,4 +1,66 @@
-﻿body {
+﻿header, footer {
+    background: #19191a;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+main {
+    padding: 72px 0 0 0;
+}
+
+#btnFeeds {
+    margin: 4px;
+    position: absolute;
+    right: 0;
+    top: 40px;
+}
+
+#feeds {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+    #feeds a {
+        color: rgb(244, 250, 255);
+    }
+
+        #feeds a:focus {
+            color: #7171e2;
+        }
+
+        #feeds a:hover {
+            color: #52529d;
+        }
+
+        #feeds a:active {
+            color: #151541;
+        }
+
+button.btn-dark, a.btn-dark {
+    background-color: #17181a;
+    color: rgb(244, 250, 255);
+    margin: 0;
+}
+
+    button.btn-dark:focus, a.btn-dark:focus {
+        background-color: #838eab;
+        color: #7171e2;
+    }
+
+    button.btn-dark:hover, a.btn-dark:hover {
+        background-color: #2e3034;
+        color: #52529d;
+    }
+
+    button.btn-dark:active, a.btn-dark:active {
+        color: #151541;
+    }
+
+.fixed {
+    position: fixed;
 }
 
 .vertical-center {
@@ -7,6 +69,15 @@
 
 tbody > tr > td.vertical-center {
     vertical-align: middle;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.tab-header {
+    margin: 12px 0 12px 0;
+    padding: 32px;
 }
 
 .bordered {
@@ -27,12 +98,12 @@ table.tight > tbody {
     padding: 0;
 }
 
-table.tight > tbody > tr {
-    margin: 0;
-    padding: 0;
-}
+    table.tight > tbody > tr {
+        margin: 0;
+        padding: 0;
+    }
 
-table.tight > tbody > tr > td {
-    margin: 0;
-    padding: 0;
-}
+        table.tight > tbody > tr > td {
+            margin: 0;
+            padding: 0;
+        }

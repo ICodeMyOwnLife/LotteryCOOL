@@ -9,6 +9,7 @@
 
 var model = {
     items: [],
+    selectedItem: {},
     links: [],
     selectedLink: {},
     url: "http://xskt.com.vn/rss-feed/mien-nam-xsmn.rss"
@@ -18,7 +19,9 @@ var lotteryApp = angular.module("lotteryApp", ["filtersModule"]);
 
 var selectRssLink = function (url, $http) {
     $http.jsonp(Yql.getYqlUrl(url, "rss", "json")).then(function (response) {
-        model.items = parseLotteryRss(response.data);
+        var items = parseLotteryRss(response.data);
+        model.items = items;
+        if (items.length > 0) model.selectedItem = items[0];
     });
 };
 
@@ -26,15 +29,30 @@ var mainController = lotteryApp.controller("mainController", function ($scope, $
     $scope.model = model;
 
     $scope.fetchFeed = function () {
-        $http.jsonp(Yql.getYqlUrl($scope.model.url, "rss", "json")).then(function(response) {
-            model.items = parseLotteryRss(response.data);
-        });
+        //$http.jsonp(Yql.getYqlUrl($scope.model.url, "rss", "json")).then(function(response) {
+        //    model.items = parseLotteryRss(response.data);
+        //});
 
         selectRssLink($scope.model.url, $http);
     };
 
-    $scope.selectLink = function() {
-        selectRssLink($scope.model.selectedLink.url, $http);
+
+    var panelColors = ["warning", "info", "danger", "success"];
+    $scope.getPanelStyle = function(index) {
+        return "panel panel-" + panelColors[index % panelColors.length];
+    }
+
+    $scope.getTabActiveState = function(item) {
+        return item === $scope.model.selectedItem ? "active" : "";
+    }
+
+    $scope.selectLink = function (link) {
+        $scope.model.selectedLink = link;
+        selectRssLink(link.url, $http);
+    };
+
+    $scope.selectItem = function(item) {
+        $scope.model.selectedItem = item;
     };
 });
 

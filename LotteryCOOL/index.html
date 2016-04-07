@@ -11,191 +11,65 @@
     <meta charset="utf-8" />
 </head>
 
-<body ng-controller="mainController">
-    <div class="container-fluid">
-        <!--<form class="form-horizontal">
-            <div class="form-group row">
-                <label for="txtUrl" class="col-xs-1 control-label">URL:</label>
-                <div class="col-xs-4">
-                    <input type="text" class="form-control" id="txtUrl" placeholder="http://" ng-model="model.url">
-                </div>
-                <div class="col-xs-1">
-                    <button id="cmdGetFeed" class="btn btn-primary" ng-click="fetchFeed()">Get Feed</button>
-                </div>
-            </div>
-        </form>-->
+<body ng-controller="mainController" ng-cloak>
+<header>
+    <!-- Tab bar -->
+    <ul class="nav nav-tab nav-justified">
+        <li role="presentation" ng-repeat="item in model.items">
+            <a href="#" class="btn-dark" ng-click="selectItem(item)">{{item.date.format('DD/MM/YYYY')}}</a>
+        </li>
+    </ul>
 
-        <select ng-model="model.selectedLink" ng-options="link.content for link in model.links" ng-change="selectLink()"></select>
+    <!-- Toggel button -->
+    <a id="btnFeeds" class="btn btn-dark" role="button" data-toggle="collapse" href="#feeds"
+       aria-expanded="False" aria-controls="feeds">_</a>
+</header>
 
-        <!--<div ng-repeat="item in model.items">
-            <h2 class="text-center danger">{{item.date}}</h2>
-            <div class="row bordered" ng-repeat="locPrizes in item.locationPrizes">
-                <div class="col-xs-4">
-                    <h3>{{locPrizes.location}}</h3>
-                </div>
-                <div class="col-xs-8 bordered">
-                    <div class="row bordered" ng-repeat="prizeResults in locPrizes.prizeResults">
-                        <div class="col-xs-3">
-                            <h4>{{prizeResults.prize}}</h4>
-                        </div>
-                        <div class="col-xs-9">
-                            <div class="row bordered" ng-repeat="result in prizeResults.results">
-                                <div class="col-xs-7">{{result.full}}</div>
-                                <div class="col-xs-5">{{result.trailing}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        <div class="panel" ng-repeat="item in model.items">
-            <div class="panel-heading">
-                <h2 class="text-center">{{item.date.format('dddd DD/MM/YYYY') | uppercase}}</h2>
-            </div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <div ng-repeat="locPrizes in item.locationPrizes">
-                        <h3 class="text-center">{{locPrizes.location | uppercase}}</h3>
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" scope="col">Giải</th>
-                                    <th class="text-center" scope="col">Kết quả trúng</th>
-                                    <th class="text-center" scope="col">2 số cuối</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat-start="prizeResults in locPrizes.prizeResults"></tr>
-                                <tr ng-repeat="result in prizeResults.results">
-                                    <td class="text-center vertical-center" rowspan="{{prizeResults.results.length}}" ng-if="$first">{{prizeResults.prize}}</td>
-                                    <td class="text-center">{{result.full}}</td>
-                                    <td class="text-center">{{result.trailing}}</td>
-                                </tr>
-                                <tr ng-repeat-end></tr>
-                                <tr ng-repeat-end></tr>
-                            </tbody>
-                        </table>
-                    </div>
+<main>
+    <!-- Choose feeds -->
+    <div id="feeds" class="collapse">
+        <ul class="nav nav-stacked">
+            <li role="presentation" ng-repeat="link in model.links">
+                <a class="btn-dark" href="#" ng-click="selectLink(link)">{{link.content}}</a>
+            </li>
+        </ul>
+    </div>   
 
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="panel" ng-repeat="item in model.items">
-            <div class="panel-heading">
-                <h2>{{item.date.format('dddd DD/MM/YYYY') | titlecase}}</h2>
-            </div>
-            <div class="panel-body">
-                <div ng-repeat="locPrizes in item.locationPrizes">
-                    <span>{{locPrizes.location}}</span>
-                    <div class="row bordered loose-row" ng-repeat="prizeResults in locPrizes.prizeResults">
-                        <div class="col-xs-3">
-                            <h4 class="text-center">{{prizeResults.prize}}</h4>
-                        </div>
-                        <div class="col-xs-9">
-                            <div class="row" ng-repeat="result in prizeResults.results">
-                                <div class="col-xs-7 text-center">{{result.full}}</div>
-                                <div class="col-xs-5 text-center">{{result.trailing}}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row" ng-repeat="item in model.items">
-            <div class="panel panel-success">
-                <div class="panel-heading">{{item.date}}</div>
-                <div class="panel-body"></div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover table-bordered tight">
-                        <thead>
-                            <tr>
-                                <th scope="col">Location</th>
-                                <th scope="col">Prizes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="locPrizes in item.locationPrizes">
-                                <td>{{locPrizes.location}}</td>
-                                <td>
-                                    <table class="table table-bordered table-hover table-striped tight">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Prize</th>
-                                                <th scope="col">Results</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="prizeResults in locPrizes.prizeResults">
-                                                <td>{{prizeResults.prize}}</td>
-                                                <td>
-                                                    <table class="table table-bordered table-hover table-striped tight">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">Full</th>
-                                                                <th scope="col">Trailing</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr ng-repeat="result in prizeResults.results">
-                                                                <td>{{result.full}}</td>
-                                                                <td>{{result.trailing}}</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
-
-
-        <!--<div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in model.items">
-                    <td>{{$index + 1}}</td>
-                    <td>{{item.title}}</td>
-                    <td>{{item.description}}</td>
-                </tr>
-                </tbody>
-            </table>
-               <!--<div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in model.items">
-                    <td>{{$index + 1}}</td>
-                    <td>{{item.title}}</td>
-                    <td>{{item.description}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>-->
+    <!-- Tab header -->
+    <div class="tab-header bg-primary">
+        <h1 class="text-center bold">{{model.selectedItem.date.format('dddd DD/MM/YYYY') | uppercase}}</h1>
     </div>
+
+    <!-- Content panels -->
+    <div ng-repeat="locPrizes in model.selectedItem.locationPrizes" ng-class="getPanelStyle($index)">
+        <div class="panel-heading">
+            <h3 class="text-center bold">{{locPrizes.location | uppercase}}</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th class="text-center" scope="col"><h4>Giải</h4></th>
+                    <th class="text-center" scope="col"><h4>Kết quả trúng</h4></th>
+                    <th class="text-center" scope="col"><h4>2 số cuối</h4></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat-start="prizeResults in locPrizes.prizeResults"></tr>
+                <tr ng-repeat="result in prizeResults.results">
+                    <td class="text-center vertical-center" rowspan="{{prizeResults.results.length}}" ng-if="$first">{{prizeResults.prize}}</td>
+                    <td class="text-center">{{result.full}}</td>
+                    <td class="text-center">{{result.trailing}}</td>
+                </tr>
+                <tr ng-repeat-end></tr>
+                <tr ng-repeat-end></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+    <footer></footer>
     <script src="Scripts/Libraries/bootstrap.min.js"></script>
     <script src="Scripts/Libraries/moment.min.js"></script>
     <script src="Scripts/Libraries/moment-with-locales.min.js"></script>
