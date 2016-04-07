@@ -880,6 +880,7 @@
     <None Include="Scripts\Libraries\jquery-2.2.2.intellisense.js" />
     <Content Include="Scripts\Libraries\jquery-2.2.2.js" />
     <Content Include="Scripts\Libraries\jquery-2.2.2.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\Models\lottery.js" />
     <Content Include="Scripts\Controllers\main-controller.js" />
     <Content Include="Scripts\Libraries\moment-with-locales.js" />

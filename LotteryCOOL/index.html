@@ -12,62 +12,72 @@
 </head>
 
 <body ng-controller="mainController" ng-cloak>
-<header>
-    <!-- Tab bar -->
-    <ul class="nav nav-tab nav-justified">
-        <li role="presentation" ng-repeat="item in model.items">
-            <a href="#" class="btn-dark" ng-click="selectItem(item)">{{item.date.format('DD/MM/YYYY')}}</a>
-        </li>
-    </ul>
-
-    <!-- Toggel button -->
-    <a id="btnFeeds" class="btn btn-dark" role="button" data-toggle="collapse" href="#feeds"
-       aria-expanded="False" aria-controls="feeds">_</a>
-</header>
-
-<main>
-    <!-- Choose feeds -->
-    <div id="feeds" class="collapse">
-        <ul class="nav nav-stacked">
-            <li role="presentation" ng-repeat="link in model.links">
-                <a class="btn-dark" href="#" ng-click="selectLink(link)">{{link.content}}</a>
+    <header>
+        <!-- Tab bar -->
+        <ul class="nav nav-tab nav-justified">
+            <li role="presentation" ng-repeat="item in model.items">
+                <a href="#" class="btn-dark" ng-click="selectItem(item)">{{item.date.format('DD/MM/YYYY')}}</a>
             </li>
         </ul>
-    </div>   
+    </header>
 
-    <!-- Tab header -->
-    <div class="tab-header bg-primary">
-        <h1 class="text-center bold">{{model.selectedItem.date.format('dddd DD/MM/YYYY') | uppercase}}</h1>
-    </div>
+    <main>
+        <!-- Toggel button -->
+        <!--<button id="btnFeeds" type="button" class="btn btn-dark" data-toggle="collapse" data-target="#feeds" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>-->
 
-    <!-- Content panels -->
-    <div ng-repeat="locPrizes in model.selectedItem.locationPrizes" ng-class="getPanelStyle($index)">
-        <div class="panel-heading">
-            <h3 class="text-center bold">{{locPrizes.location | uppercase}}</h3>
+        <a id="btnFeeds" class="btn btn-dark" role="button" data-toggle="collapse" href="#feeds"
+           aria-expanded="False" aria-controls="feeds">
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </a>
+
+        <!-- Feeds List -->
+        <div id="feeds" class="collapse">
+            <ul class="nav nav-stacked">
+                <li role="presentation" ng-repeat="link in model.links">
+                    <a class="btn-dark" href="#" ng-click="selectLink(link)">{{link.content}}</a>
+                </li>
+            </ul>
         </div>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th class="text-center" scope="col"><h4>Giải</h4></th>
-                    <th class="text-center" scope="col"><h4>Kết quả trúng</h4></th>
-                    <th class="text-center" scope="col"><h4>2 số cuối</h4></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat-start="prizeResults in locPrizes.prizeResults"></tr>
-                <tr ng-repeat="result in prizeResults.results">
-                    <td class="text-center vertical-center" rowspan="{{prizeResults.results.length}}" ng-if="$first">{{prizeResults.prize}}</td>
-                    <td class="text-center">{{result.full}}</td>
-                    <td class="text-center">{{result.trailing}}</td>
-                </tr>
-                <tr ng-repeat-end></tr>
-                <tr ng-repeat-end></tr>
-                </tbody>
-            </table>
+
+
+        <!-- Tab header -->
+        <div class="tab-header bg-primary">
+            <h1 class="text-center bold">{{model.selectedItem.date.format('dddd DD/MM/YYYY') | uppercase}}</h1>
         </div>
-    </div>
-</main>
+
+        <!-- Content panels -->
+        <div ng-repeat="locPrizes in model.selectedItem.locationPrizes" ng-class="getPanelStyle($index)">
+            <div class="panel-heading">
+                <h3 class="text-center bold">{{locPrizes.location | uppercase}}</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="col"><h4>Loại Giải</h4></th>
+                            <th class="text-center" scope="col"><h4>Kết quả trúng</h4></th>
+                            <th class="text-center" scope="col"><h4>2 số cuối</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat-start="prizeResults in locPrizes.prizeResults"></tr>
+                        <tr ng-repeat="result in prizeResults.results">
+                            <td class="text-center vertical-center" rowspan="{{prizeResults.results.length}}" ng-if="$first">{{prizeResults.prize}}</td>
+                            <td class="text-center">{{result.full}}</td>
+                            <td class="text-center">{{result.trailing}}</td>
+                        </tr>
+                        <tr ng-repeat-end></tr>
+                        <tr ng-repeat-end></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 
     <footer></footer>
     <script src="Scripts/Libraries/bootstrap.min.js"></script>
@@ -78,5 +88,6 @@
     <script src="Scripts/Models/yql.js"></script>
     <script src="Scripts/Controllers/main-controller.js"></script>
     <script src="Scripts/Custom/custom-filters-angular.js"></script>
+    <script src="Scripts/main.js"></script>
 </body>
 </html>

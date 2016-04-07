@@ -37,12 +37,12 @@ var mainController = lotteryApp.controller("mainController", function ($scope, $
     };
 
 
-    var panelColors = ["warning", "info", "danger", "success"];
-    $scope.getPanelStyle = function(index) {
+    var panelColors = ["danger", "success", "warning", "info"];
+    $scope.getPanelStyle = function (index) {
         return "panel panel-" + panelColors[index % panelColors.length];
     }
 
-    $scope.getTabActiveState = function(item) {
+    $scope.getTabActiveState = function (item) {
         return item === $scope.model.selectedItem ? "active" : "";
     }
 
@@ -51,7 +51,7 @@ var mainController = lotteryApp.controller("mainController", function ($scope, $
         selectRssLink(link.url, $http);
     };
 
-    $scope.selectItem = function(item) {
+    $scope.selectItem = function (item) {
         $scope.model.selectedItem = item;
     };
 });
@@ -64,7 +64,7 @@ lotteryApp.run(function ($http) {
     parser.href = sourceUrl;
     var host = parser.hostname;
 
-    var getRssLinks= function(data) {
+    var getRssLinks = function (data) {
         var rssLinks = [];
         var links = $(data.results[0]).find("#ulrss>li>a");
 
